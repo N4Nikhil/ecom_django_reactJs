@@ -1,8 +1,10 @@
-from django.shortcuts import render
-from django.http import JsonResponse
+
 
 # Create your views here.
+from rest_framework import viewsets
+from .serializers import ProductSerializer
+from .models import Product
 
-
-def home(request):
-    return JsonResponse({'info':'Django React Course','name':'Nikhil'})
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all().order_by('name')
+    serializer_class = ProductSerializer
